@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html data-lt-installed="true" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Corporate Network Visualization</title>
+
+
+    <script
+        type="text/javascript"
+        src="assets/js/vis-network.js"
+    ></script>
+
+    <style type="text/css">
+      #mynetwork {
+        width: 900px;
+        height: 600px;
+        border: 1px solid lightgray;
+      }
+    </style>
+
+    <script type="text/javascript">
+     function networkFromFile() {
+         // create an array with nodes
+         let nodes = new vis.DataSet([]);
+
+         // create an array with edges
+         let edges = new vis.DataSet([]);
+
+         // create a network
+         const container = document.getElementById("mynetwork");
+         const data = {
+             nodes: nodes,
+             edges: edges,
+         };
+         const options = {
+             nodes : {
+                 font:  { size : 6 },
+                 scaling : {
+                     max : 12,
+                     label: false
+                 }},
+             edges : {
+                 font: { size: 6 }
+             },
+             layout: {
+                 improvedLayout: false
+             }
+         };
+         var network = new vis.Network(container, data, options);
+        let node_label_to_id = new Map();
+        const reader = new FileReader();
+        reader.addEventListener("load", function (event) {
+            let lines = this.result.split('\n');
+            for(var line = 1; line < lines.length; line++){
+                // By tabs
+                const tabs = lines[line].split('\t');
+                const name = tabs[0];
+                const pos = tabs[1];
+                const org = tabs[2];
+                let nameid = 0;
+                let orgid = 0;
+                if ( ! node_label_to_id.has(name)) {
+                    nameid = nodes.length;
+                    node_label_to_id.set(name, nameid);
+                    nodes.add([{id: nameid, label: name, color: '#ff0000' }]);
+                } else {
+                    nameid = node_label_to_id.get(name);
+                }
+
+
+                if ( ! node_label_to_id.has(org)) {
+                    orgid = nodes.length;
+                    node_label_to_id.set(org, orgid);
+                    nodes.add([{id: orgid, label: org, color: '#00ff00'}]);
+                } else {
+                    orgid = node_label_to_id.get(org);
+                }
+                edges.add([{from: nameid, to: orgid, title: pos}]);
+            }
+        }, false);
+         const file = document.querySelector('input[type=file]').files[0];
+         if (file) {
+             reader.readAsText(file);
+         }
+     }
+    </script>
+  </head>
+  <body>
+      <p>Visualize a three column spreadsheet with Name, Position, Organization as the three columns. Specific instructions for Google sheets:
+
+          <ul>
+              <li> Press File, then Download, then Tab-Separated Values (.tsv, current sheet) </li>
+              <li>
+                  Select the downloaded .tsv file using the Browse button below.
+              </li>
+              <li>
+                  Wait for the visualization to appear.
+              </li>
+          </ul>
+      </p>
+      <input type="file" onchange="networkFromFile()">
+      <div id="mynetwork"></div>
+</body></html>

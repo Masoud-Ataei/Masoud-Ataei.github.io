@@ -1,0 +1,62 @@
+url: https://vikasdhiman.info
+remote_theme:  wecacuee/plainwhite-jekyll
+title: Vikas Dhiman
+author: Vikas Dhiman
+description: Professional website
+show_excerpts: true
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+paginate: 10
+
+
+header_pages:
+  - contact.md
+  - publications/mypub.html
+  - s/z490.md
+
+
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-remote-theme
+
+plainwhite:
+  name: Vikas Dhiman
+  tagline: |
+     Asst Prof @ UMaine
+     Robotics, Autonomous Vehicles,
+     Machine Learning
+
+  sitemap: true
+
+  search: true
+
+  html_lang: "en"
+
+  navigation:
+    - title: Contact
+      url: "/contact"
+    - title: Publications
+      url: publications/mypub.html
+    - title: Teaching
+      url: "/teaching"
+    - title: Calendar
+      url: https://calendar.google.com/calendar/embed?src=vikas.dhiman%40maine.edu&ctz=America%2FNew_York
+    - title: Resume
+      url: "/images/resume.pdf"
+    - title: Scholar
+      url: https://scholar.google.com/citations?user=6Pn0FGUAAAAJ&hl=en
+
+  portfolio_image: images/mugshot-hyd-flowers.png
+    
+
+  social_links:
+    github: wecacuee
+    twitter: VikasDhimanR
+    email: vikas.dhiman@maine.edu
+    mastodon:
+      - username: vikasdhimanpkl
+        instance: sigmoid.social
