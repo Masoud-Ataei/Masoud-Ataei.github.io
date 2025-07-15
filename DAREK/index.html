@@ -1,91 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAREK: Distance-Aware Regression Error Kernel</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f9fb;
-      color: #333;
-    }
-    header {
-      background: #004080;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
-    }
-    section {
-      margin-bottom: 2rem;
-    }
-    h1, h2 {
-      color: #004080;
-    }
-    a {
-      color: #004080;
-      text-decoration: none;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 2rem;
-      padding: 1rem;
-      border-top: 1px solid #ddd;
-    }
-  </style>
+  <title>DAREK: Distance Aware Error for Kolmogorov Networks</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-white text-gray-800 font-sans">
+  <!-- Hero -->
+  <section class="text-center py-16 bg-gradient-to-br from-blue-100 to-white" id="home">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">DAREK</h1>
+      <p class="text-xl mb-2">Distance Aware Error for Kolmogorov Networks</p>
+      <p class="text-gray-600 mb-4">Masoud Ataei, Mohammad Javad Khojasteh, Vikas Dhiman</p>
+      <a href="https://arxiv.org/abs/2501.04757" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Read Paper</a>
+    </div>
+  </section>
 
-<header>
-  <h1>DAREK</h1>
-  <p>Distance-Aware Regression Error Kernel</p>
-</header>
-
-<main>
-  <section>
-    <h2>About</h2>
-    <p>
-      DAREK is a novel method for distance-aware uncertainty estimation in regression models,
-      improving over standard techniques by incorporating explicit distance information in the error kernel.
+  <!-- Abstract -->
+  <section class="py-12 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-4">Abstract</h2>
+    <p class="text-gray-700 max-w-3xl mx-auto">
+      We present DAREK, a method to compute tight, distance-aware, worst-case error bounds for Kolmogorov-Arnold Networks (KANs). Unlike Monte Carlo-based uncertainty estimation, DAREK uses Lipschitz continuity of spline functions to derive analytical bounds that increase with distance from training data. We also propose a modified KAN that generates uncertainty estimates at test time, demonstrated in a shape estimation task using sparse laser scans.
     </p>
   </section>
 
-  <section>
-    <h2>Features</h2>
-    <ul>
-      <li>Captures distance-aware predictive uncertainty</li>
-      <li>Lightweight and efficient implementation</li>
-      <li>Outperforms classical GPs and ensembles on benchmark tasks</li>
+  <!-- Interactive Demo -->
+  <section class="py-12 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-6">Interactive Demo</h2>
+    <!-- <h2 id="temprary">Interactive Demo</h2> -->
+    <div class="border rounded shadow-md overflow-hidden bg-gray-50 p-4">
+      <svg id="svgCanvas" width="100%" height="400px" class="bg-white border" style="touch-action: none;">        
+        <path id="polyFill" fill="#ffbac6" stroke="none" />
+        <path id="newtonPoly" stroke="#6366f1" stroke-width="2" fill="none" />
+        <circle id="circle1" cx="100" cy="300" r="20" fill="#3b82f6" />
+        <circle id="circle2" cx="200" cy="100" r="20" fill="#3b82f6" />
+        <circle id="circle3" cx="300" cy="250" r="20" fill="#3b82f6" />
+        <circle id="circle4" cx="400" cy="150" r="20" fill="#3b82f6" />        
+      </svg>
+      <div style="display: flex; align-items: center; gap: 16px; margin-top: 2rem;">
+
+        <!-- Left label -->
+        <span style="width: 40%; text-align: right;">Lipschitz constant</span>
+
+        <!-- Slider container -->
+        <!-- <div style="flex: 1; position: relative;"> -->
+          <!-- Native slider -->
+          <input
+            type="range"
+            id="lipSlider"
+            min="0"
+            max="10"
+            step="1"
+            value="1"
+            style="width: 100%;"
+          />
+
+        </div>
+        <p class="text-sm text-gray-600 mt-2 text-center">Click and drag any circle. 
+                  Newton polynomial and interpolation error bounds update in real time.</p>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="bg-gray-100 py-12 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-6">Highlights</h2>
+    <ul class="list-disc list-inside max-w-3xl mx-auto text-gray-700 space-y-2">
+      <li>Tight, analytical, distance-aware error bounds</li>
+      <li>Lipschitz continuity applied to spline layers</li>
+      <li>Efficient and interpretable uncertainty estimation</li>
+      <li>Outperforms Monte Carlo methods in real-world shape estimation</li>
     </ul>
   </section>
 
-  <section>
-    <h2>Resources</h2>
-    <p>
-      📄 <a href="https://link-to-your-paper.com">Read the paper</a><br/>
-      💻 <a href="https://github.com/yourusername/darek">View the code on GitHub</a>
-    </p>
+  <!-- Results -->
+  <section class="py-12 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-6">Results</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <img src="images/shape_estimation_result.png" alt="Shape Estimation Result" class="rounded shadow">
+      <img src="images/error_bound_plot.png" alt="Error Bound Plot" class="rounded shadow">
+    </div>
+    <p class="mt-4 text-center text-sm text-gray-500">* Replace with your own figures</p>
   </section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:your@email.com">your@email.com</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile">yourprofile</a></p>
+  <!-- BibTeX -->
+  <section class="bg-gray-50 py-12 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-4">Cite This Work</h2>
+    <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
+@inproceedings{ataei2025darek,
+  title={DAREK-Distance Aware Error for Kolmogorov Networks},
+  author={Ataei, Masoud and Khojasteh, Mohammad Javad and Dhiman, Vikas},
+  booktitle={ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  pages={1--5},
+  year={2025},
+  organization={IEEE}
+}
+    </pre>
   </section>
-</main>
 
-<footer>
-  &copy; 2025 Masoud Ataei | DAREK Project
-</footer>
+  <!-- Footer -->
+  <footer class="text-center py-8 text-gray-600">
+    <p>© 2025 DAREK Project | <a href="mailto:your-email@example.com" class="underline">Contact</a></p>
+  </footer>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    let selected = null;
+    let offset = { x: 0, y: 0 };
+
+    const svg = document.getElementById("svgCanvas");
+    const circles = [
+      document.getElementById("circle1"),
+      document.getElementById("circle2"),
+      document.getElementById("circle3"),
+      document.getElementById("circle4")
+    ];
+
+    const path = document.getElementById("newtonPoly");
+    const fill = document.getElementById("polyFill");
+    // const text = document.getElementById('temprary');
+    const slider = document.getElementById("lipSlider");
+    // .textContent = 'New Title Here';
+    
+    function updatePath() {
+      const pts = circles.map(c => ({
+        x: parseFloat(c.getAttribute("cx")),
+        y: parseFloat(c.getAttribute("cy"))
+      })).sort((a, b) => a.x - b.x);
+      
+      function newtonInterp(pts, x) {
+        const n = pts.length;
+        const divDiff = new Array(n).fill(0).map(_ => Array(n).fill(0));
+        for (let i = 0; i < n; i++) divDiff[i][0] = pts[i].y;
+        for (let j = 1; j < n; j++)
+          for (let i = 0; i < n - j; i++)
+            divDiff[i][j] = (divDiff[i+1][j-1] - divDiff[i][j-1]) / (pts[i+j].x - pts[i].x);
+
+        let result = divDiff[0][0];
+        let mult = 1;
+        for (let i = 1; i < n; i++) {
+          mult *= (x - pts[i - 1].x);
+          result += divDiff[0][i] * mult;
+        }
+        return result;
+      }
+
+      let Lipschitz = 0.000005; // Adjusted for demo purposes
+      let d = "M";
+      let f = "M";
+      let u = 0;
+      // text.textContent = `Lipschitz constant: ${slider.value}`;
+      const svg = document.getElementById('svgCanvas');
+      const rect = svg.getBoundingClientRect();
+      // console.log(`SVG width: ${rect.width}, height: ${rect.height}`);
+      const upper = [], lower = [];
+      for (let x = 0; x <= rect.width; x += 1) {
+        const y = newtonInterp(pts, x);
+        d += `${x},${y} `;
+        const n = pts.length;
+        let mult = 1;
+        let fact = 1;        
+        for (let i = 0; i < n; i++) {
+          mult *= (x - pts[i].x);          
+          fact *= (i + 1);
+        }
+        u = mult / fact * Lipschitz * slider.value; // Simplified error term
+        upper.push([x, y - u]);
+        lower.unshift([x, y + u]);
+      }
+      path.setAttribute("d", d);
+      f += upper.map(p => `${p[0]},${p[1]}`).join(" ") + " " + lower.map(p => `${p[0]},${p[1]}`).join(" ") + " Z";
+      fill.setAttribute("d", f);
+    }
+
+    circles.forEach(circle => {
+      circle.addEventListener("mousedown", e => {
+        selected = e.target;
+        offset.x = e.offsetX - parseFloat(selected.getAttribute("cx"));
+        offset.y = e.offsetY - parseFloat(selected.getAttribute("cy"));
+      });
+    });
+
+    svg.addEventListener("mousemove", e => {
+      if (selected) {
+        const pt = svg.createSVGPoint();
+        pt.x = e.clientX;
+        pt.y = e.clientY;
+        const ctm = svg.getScreenCTM().inverse();
+        const transformed = pt.matrixTransform(ctm);
+        selected.setAttribute("cx", transformed.x - offset.x);
+        selected.setAttribute("cy", transformed.y - offset.y);
+        updatePath();
+      }
+    });
+
+    svg.addEventListener("mouseup", () => selected = null);
+    svg.addEventListener("mouseleave", () => selected = null);
+
+    slider.addEventListener('input', () => {
+      updatePath();
+    });
+    updatePath();
+  </script>
+  
+  
 </body>
 </html>
