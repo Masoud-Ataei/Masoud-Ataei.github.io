@@ -9,19 +9,12 @@
 </head>
 <body class="bg-white text-gray-800 font-sans">
   <!-- Hero -->
-  <section class="text-center py-16 bg-gradient-to-br from-blue-100 to-white" id="home">
-    <!-- <div class="container mx-auto px-4">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">DAREK</h1>
-      <p class="text-xl mb-2">Distance Aware Error for Kolmogorov Networks</p>
-      <p class="text-gray-600 mb-4">Masoud Ataei, Mohammad Javad Khojasteh, Vikas Dhiman</p>
-      <a href="https://ieeexplore.ieee.org/document/10888425" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Read Paper</a>
-      <a href="https://github.com/Masoud-Ataei/DAREK" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Code</a>
-    </div> -->
-    <div class="container mx-auto px-4 py-12 text-center">
+  <section class="text-center py-4 bg-gradient-to-br from-blue-100 to-white" id="home">    
+    <div class="container mx-auto px-4 py-5 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">DAREK</h1>
       <p class="text-xl mb-2 text-gray-800"> Distance Aware Error for Kolmogorov Networks </p>
 
-      <div class="flex flex-col md:flex-row justify-center items-start gap-8 text-sm text-gray-700 max-w-4xl mx-auto mb-6 mt-6">      
+      <div class="flex flex-col md:flex-row justify-center items-center gap-8 text-sm text-gray-700 max-w-4xl mx-auto mb-6 mt-6">      
         <div class="flex-1 text-center">
           <p><strong>Masoud Ataei</strong></p>
           <!-- <p>Dept. of Electrical & Computer Engineering</p> -->
@@ -65,15 +58,23 @@
   </section>
 
   <!-- Abstract -->
-  <section class="py-12 px-4 md:px-20">
-    <h2 class="text-2xl font-bold mb-4">Abstract</h2>
-    <p class="text-gray-700 max-w-3xl mx-auto text-justify">
-      We present DAREK, a method to compute <b>tight</b>, <b>distance-aware</b>, <b>worst-case error bounds</b> for Kolmogorov-Arnold Networks (KANs). Unlike probabilistic uncertainty estimation, DAREK uses Lipschitz continuity of true functions to derive analytical bounds that increase with distance from training data.
-    </p>
+  <section class="py-5 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-4 ">Abstract</h2>
+      <div class="flex flex-col md:flex-row items-center md:items-start md:justify-center gap-6">
+        <p class="text-gray-700 max-w-3xl mx-auto text-justify">
+          We present DAREK, a method to compute <b>tight</b>, <b>distance-aware</b>, <b>worst-case error bounds</b> for Kolmogorov-Arnold Networks (KANs). Unlike probabilistic uncertainty estimation, DAREK uses Lipschitz continuity of true functions to derive analytical bounds that increase with distance from training data.
+        </p>
+        <div class="flex-shrink-0">
+          <img src="imgs/Time_results.png" alt="DAREK Abstract Illustration" class="w-48 md:w-64 h-auto rounded-lg shadow-md">
+        </div>
+      </div>
+      <div class="flex justify-center mt-4">
+          <img src="imgs/DAREK3.png" alt="DAREK Abstract Illustration" class="w-100 h-auto rounded-lg shadow-md">
+      </div>
   </section>
 
   <!-- Interactive Demo -->
-  <section class="py-12 px-4 md:px-20">
+  <section class="py-5 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-6">Interactive Demo of Newton Polynomial</h2>
     <!-- <h2 id="temprary">Interactive Demo</h2> -->
     <div class="flex justify-center">
@@ -133,8 +134,8 @@
   </section>
 
   <!-- Highlights -->
-  <section class="bg-gray-100 py-12 px-4 md:px-20">
-    <h2 class="text-2xl font-bold mb-6">Highlights</h2>
+  <section class="bg-gray-100 py-5 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-2">Highlights</h2>
     <ul class="list-disc list-inside max-w-3xl mx-auto text-gray-700 space-y-2">
       <li>Tight, analytical, distance-aware error bounds for spline based neural networks</li>      
       <li>Efficient and interpretable uncertainty estimation</li>
@@ -143,27 +144,17 @@
   </section>
 
   <!-- Results -->
-  <section class="py-12 px-4">
-    <h2 class="text-1x2 font-bold mb-6">Results</h2>
-    <div class="flex flex-wrap justify-center items-start gap-5">
-        <div>
-          <!-- <div style="position: relative; width: 300px; height: 300px; overflow: hidden; border-radius: 0.5rem; flex-shrink: 0;">
-              <img src="imgs/croped_anim_GP2.gif" alt="Base GIF" style="position: absolute; top: 0; left: 0; width: 300px; height: auto;">
-              <img src="imgs/croped_anim_GP2_zoom2.gif" alt="Overlay GIF" style="position: absolute; top: 180px; left: 2px; width: 118px; height: auto; z-index: 1;">
-          </div> -->
+  <section class="py-5 px-4">
+    <h2 class="text-2xl font-bold mb-2">Results</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-auto gap-5 justify-items-center items-start">
+        <div class="flex flex-col items-center">
           <img src="imgs/overlayed_gifsanim_GP2.gif" alt="Base GIF" style="width: 300px; height: auto;">
           <p class="text-center mt-2 text-gray-700">Multi agent simulation when GP model fails.</p>
         </div>
-        <div>
-          <!-- <div style="position: relative; width: 300px; height: 300px; overflow: hidden; border-radius: 0.5rem; flex-shrink: 0;">
-              <img src="imgs/croped_anim_DAREK2.gif" alt="Base GIF" style="position: absolute; top: 0; left: 0; width: 300px; height: auto;">
-              <img src="imgs/croped_anim_DAREK2_zoom2.gif" alt="Overlay GIF" style="position: absolute; top: 180px; left: 2px; width: 118px; height: auto; z-index: 1;">
-          </div> -->
+        <div class="flex flex-col items-center">
           <img src="imgs/overlayed_gifsanim_DAREK2.gif" alt="Base GIF" style="width: 300px; height: auto;">
           <p class="text-center mt-2 text-gray-700">Multi agent simulation when DAREK model reach goal.</p>          
         </div>
-
-
     </div>
   </section>
 
