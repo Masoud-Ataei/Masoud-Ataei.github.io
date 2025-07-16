@@ -10,11 +10,57 @@
 <body class="bg-white text-gray-800 font-sans">
   <!-- Hero -->
   <section class="text-center py-16 bg-gradient-to-br from-blue-100 to-white" id="home">
-    <div class="container mx-auto px-4">
+    <!-- <div class="container mx-auto px-4">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">DAREK</h1>
       <p class="text-xl mb-2">Distance Aware Error for Kolmogorov Networks</p>
       <p class="text-gray-600 mb-4">Masoud Ataei, Mohammad Javad Khojasteh, Vikas Dhiman</p>
-      <a href="https://arxiv.org/abs/2501.04757" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Read Paper</a>
+      <a href="https://ieeexplore.ieee.org/document/10888425" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Read Paper</a>
+      <a href="https://github.com/Masoud-Ataei/DAREK" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Code</a>
+    </div> -->
+    <div class="container mx-auto px-4 py-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">DAREK</h1>
+      <p class="text-xl mb-2 text-gray-800"> Distance Aware Error for Kolmogorov Networks </p>
+
+      <div class="flex flex-col md:flex-row justify-center items-start gap-8 text-sm text-gray-700 max-w-4xl mx-auto mb-6 mt-6">      
+        <div class="flex-1 text-center">
+          <p><strong>Masoud Ataei</strong></p>
+          <!-- <p>Dept. of Electrical & Computer Engineering</p> -->
+          <p>University of Maine</p>
+          <p> <a href="mailto:masoud.ataei@maine.edu" class="text-blue-600 hover:underline">Masoud.Ataei@maine.edu</a> </p>
+        </div>
+
+        <div class="flex-1 text-center">
+          <p><strong>Mohammad Javad Khojasteh</strong></p>
+          <!-- <p>Dept. of Electrical & Computer Engineering</p> -->
+          <p>Rochester Institute of Technology</p>
+          <p> <a href="mailto:mjkeme@rit.edu" class="text-blue-600 hover:underline">mjkeme@rit.edu</a> </p>
+        </div>
+
+        <div class="flex-1 text-center">
+          <p><strong>Vikas Dhiman</strong></p>
+          <!-- <p>Dept. of Electrical & Computer Engineering</p> -->
+          <p>University of Maine</p>
+          <p> <a href="mailto:Vikas.Dhiman@maine.edu" class="text-blue-600 hover:underline">Vikas.Dhiman@maine.edu</a> </p>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="https://ieeexplore.ieee.org/document/10888425"
+          target="_blank"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded shadow transition"
+        >
+          📄 Read Paper
+        </a>
+        <a
+          href="https://github.com/Masoud-Ataei/DAREK"
+          target="_blank"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded shadow transition"
+        >
+          💻 Code on GitHub
+        </a>
+      </div>
     </div>
   </section>
 
@@ -33,10 +79,10 @@
     <div class="flex justify-center">
 
       <div class="border rounded shadow-md overflow-hidden bg-gray-50 p-4">
-        <svg id="svgCanvas" width="500px" height="400px" class="bg-white border" style="touch-action: none;">        
+        <svg id="svgCanvas" width="500px" height="300px" class="bg-white border" style="touch-action: none;">        
           <path id="polyFill" fill="#ffbac6" stroke="none" />
           <path id="newtonPoly" stroke="#6366f1" stroke-width="2" fill="none" />
-          <circle id="circle1" cx="100" cy="300" r="20" fill="#3b82f6" />
+          <circle id="circle1" cx="100" cy="200" r="20" fill="#3b82f6" />
           <circle id="circle2" cx="200" cy="100" r="20" fill="#3b82f6" />
           <circle id="circle3" cx="300" cy="250" r="20" fill="#3b82f6" />
           <circle id="circle4" cx="400" cy="150" r="20" fill="#3b82f6" />        
@@ -75,7 +121,7 @@
       <li>Efficient and interpretable uncertainty estimation</li>
       <li>Outperforms Monte Carlo methods in real-world shape estimation</li>
     </ul>
-  </section>
+  </section>sdfsdf
 
   <!-- Results -->
   <section class="py-12 px-4 md:px-20">
@@ -180,14 +226,14 @@
     }
 
     circles.forEach(circle => {
-      circle.addEventListener("mousedown", e => {
+      circle.addEventListener("pointerdown", e => {
         selected = e.target;
         offset.x = e.offsetX - parseFloat(selected.getAttribute("cx"));
         offset.y = e.offsetY - parseFloat(selected.getAttribute("cy"));
       });
     });
 
-    svg.addEventListener("mousemove", e => {
+    svg.addEventListener("pointermove", e => {
       if (selected) {
         const pt = svg.createSVGPoint();
         pt.x = e.clientX;
@@ -200,8 +246,8 @@
       }
     });
 
-    svg.addEventListener("mouseup", () => selected = null);
-    svg.addEventListener("mouseleave", () => selected = null);
+    svg.addEventListener("pointerup", () => selected = null);
+    svg.addEventListener("pointerleave", () => selected = null);
 
     slider.addEventListener('input', () => {
       updatePath();
