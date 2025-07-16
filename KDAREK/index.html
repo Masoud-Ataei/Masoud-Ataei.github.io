@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-DAREK : Distance Aware Error for Kurkova Kolmogorov Networks</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <!-- Hero -->
+  <section class="text-center py-4 bg-gradient-to-br from-blue-100 to-white" id="home">    
+    <div class="container mx-auto px-4 py-5 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">K-DAREK</h1>
+      <p class="text-xl mb-2 text-gray-800"> Distance Aware Error for Kurkova Kolmogorov Networks </p>
+
+      <div class="flex flex-col md:flex-row justify-center items-center gap-8 text-sm text-gray-700 max-w-4xl mx-auto mb-6 mt-6">      
+        <div class="flex-1 text-center">
+          <p><strong>Masoud Ataei</strong></p>
+          <!-- <p>Dept. of Electrical & Computer Engineering</p> -->
+          <p>University of Maine</p>
+          <p> <a href="mailto:masoud.ataei@maine.edu" class="text-blue-600 hover:underline">Masoud.Ataei@maine.edu</a> </p>
+        </div>
+
+        <div class="flex-1 text-center">
+          <p><strong>Vikas Dhiman</strong></p>
+          <!-- <p>Dept. of Electrical & Computer Engineering</p> -->
+          <p>University of Maine</p>
+          <p> <a href="mailto:Vikas.Dhiman@maine.edu" class="text-blue-600 hover:underline">Vikas.Dhiman@maine.edu</a> </p>
+        </div>
+
+        <div class="flex-1 text-center">
+          <p><strong>Mohammad Javad Khojasteh</strong></p>
+          <!-- <p>Dept. of Electrical & Computer Engineering</p> -->
+          <p>Rochester Institute of Technology</p>
+          <p> <a href="mailto:mjkeme@rit.edu" class="text-blue-600 hover:underline">mjkeme@rit.edu</a> </p>
+        </div>
+
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="https://"
+          target="_blank"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded shadow transition"
+        >
+          📄 Read Paper
+        </a>
+        <a
+          href="https://github.com/Masoud-Ataei/KDAREK"
+          target="_blank"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded shadow transition"
+        >
+          💻 Code on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract -->
+  <section class="py-5 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-4 ">Abstract</h2>
+      <div class="flex flex-col md:flex-row items-center md:items-start md:justify-center gap-6">
+        <p class="text-gray-700 max-w-3xl mx-auto text-justify">
+          K-DAREK is a novel extension of DAREK that introduces <b>distance-aware error bounds</b> for more <b>robust</b> function approximation. 
+          By measuring uncertainty based on the distance to training data, it produces <b>tighter</b> and <b>more meaningful</b> confidence estimates. 
+          Evaluations on safe control tasks show K-DAREK is <b>faster</b>, <b>more scalable</b>, and <b>safer</b> than methods like Gaussian Processes, Deep Ensembles, and earlier versions such as DAREK.
+        </p>
+        <div class="flex-shrink-0">
+          <img src="imgs/Time_results.png" alt="DAREK Abstract Illustration" class="w-48 md:w-64 h-auto rounded-lg shadow-md">
+        </div>
+      </div>
+      <div class="flex justify-center mt-2">
+          <img src="imgs/KDAREK.png" alt="DAREK Abstract Illustration" class="w-100 h-auto rounded-lg shadow-md">
+      </div>
+  </section>
+
+  <!-- Interactive Demo -->
+  <section class="py-5 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-6">Interactive Demo of Newton Polynomial</h2>
+    <!-- <h2 id="temprary">Interactive Demo</h2> -->
+    <div class="flex justify-center">
+
+
+      <div class="border rounded shadow-md overflow-hidden bg-gray-50 p-4">
+        <div style="display: flex; align-items: center; gap: 16px; margin-top: 0rem; margin-bottom: 1rem;">
+
+          <!-- Left label -->
+          <span style="width: 40%; text-align: right;">Lipschitz constant</span>
+
+            <input type="range" id="lipSlider" min="0" max="10" step="1" value="1" style="width: 200px;"/>
+
+        </div>
+        <svg id="svgCanvas" width="500px" height="300px" class="bg-white border" style="touch-action: none;">        
+          <path id="polyFill" fill="#ffbac6" stroke="none" />
+          <path id="newtonPoly" stroke="#6366f1" stroke-width="2" fill="none" />
+          <circle id="circle1" cx="100" cy="200" r="20" fill="#3b82f6" />
+          <circle id="circle2" cx="200" cy="100" r="20" fill="#3b82f6" />
+          <circle id="circle3" cx="300" cy="250" r="20" fill="#3b82f6" />
+          <circle id="circle4" cx="400" cy="150" r="20" fill="#3b82f6" />        
+        </svg>
+        
+          <div class="flex justify-center mt-4">
+            <div class="flex space-x-6 text-sm text-gray-700">
+              <!-- Circle -->
+              <div class="flex items-center space-x-2">
+                <svg width="20" height="20">
+                  <circle cx="10" cy="10" r="6" fill="#3b82f6" />
+                </svg>
+                <span>Knots</span>
+              </div>
+
+              <!-- Line -->
+              <div class="flex items-center space-x-2">
+                <svg width="20" height="20">
+                  <line x1="2" y1="10" x2="18" y2="10" stroke="#6366f1" stroke-width="2" />
+                </svg>
+                <span>Newton Polynomial</span>
+              </div>
+
+              <!-- Fill area -->
+              <div class="flex items-center space-x-2">
+                <svg width="20" height="20">
+                  <rect x="2" y="4" width="16" height="12" fill="#ffbac6" />
+                </svg>
+                <span>Interpolate Error Bounds</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-sm text-gray-600 mt-2 text-center">Click and drag any circle. 
+                    Newton polynomial and interpolation error bounds.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="bg-gray-100 py-5 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-2">Highlights</h2>
+    <ul class="list-disc list-inside max-w-3xl mx-auto text-gray-700 space-y-2">
+      <li> <b>Distance-aware uncertainty</b>: Provides tighter, data-dependent error bounds that improve reliability in prediction.</li>
+
+      <li> <b>High computational efficiency</b>: ~4× faster and ~10× more efficient than Deep Ensembles.</li>
+      <li> <b>Better scalability</b>: ~8.6× more scalable than Gaussian Processes as data size grows.</li>
+      <li> <b>Enhanced safety</b>: Achieves 50% greater safety over the original DAREK method in control tasks.</li>
+      <li> <b>Built on KKAN</b>: Leverages a streamlined architecture combining MLPs and Spline transformations for stable and efficient learning.</li>
+
+
+    </ul>
+  </section>
+
+  <!-- Results -->
+  <section class="py-5 px-4">
+    <h2 class="text-2xl font-bold mb-2">Results</h2>
+    <div class="gap-5 justify-items-center items-center">
+        <div class="flex flex-col items-center">
+          <img src="imgs/MA.png" alt="Base GIF" style="width: 300px; height: auto;">
+          <p class="text-center mt-2 text-gray-700">Multi agent simulation.</p>
+        </div>
+    </div>
+  </section>
+  
+  <!-- BibTeX -->
+  <section class="bg-gray-50 py-4 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-4">Cite This Work</h2>
+    <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
+<!-- @inproceedings{ataei2025darek,
+  title={DAREK-Distance Aware Error for Kolmogorov Networks},
+  author={Ataei, Masoud and Khojasteh, Mohammad Javad and Dhiman, Vikas},
+  booktitle={ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  pages={1--5},
+  year={2025},
+  organization={IEEE}
+} -->
+    </pre>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-gray-600">
+    <p>© 2025 DAREK Project | <a href="mailto:Masoud.Ataei@maine.edu" class="underline">Contact</a></p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    let selected = null;
+    let offset = { x: 0, y: 0 };
+
+    const svg = document.getElementById("svgCanvas");
+    const circles = [
+      document.getElementById("circle1"),
+      document.getElementById("circle2"),
+      document.getElementById("circle3"),
+      document.getElementById("circle4")
+    ];
+
+    const path = document.getElementById("newtonPoly");
+    const fill = document.getElementById("polyFill");
+    // const text = document.getElementById('temprary');
+    const slider = document.getElementById("lipSlider");
+    // .textContent = 'New Title Here';
+    
+    function updatePath() {
+      const pts = circles.map(c => ({
+        x: parseFloat(c.getAttribute("cx")),
+        y: parseFloat(c.getAttribute("cy"))
+      })).sort((a, b) => a.x - b.x);
+      
+      function newtonInterp(pts, x) {
+        const n = pts.length;
+        const divDiff = new Array(n).fill(0).map(_ => Array(n).fill(0));
+        for (let i = 0; i < n; i++) divDiff[i][0] = pts[i].y;
+        for (let j = 1; j < n; j++)
+          for (let i = 0; i < n - j; i++)
+            divDiff[i][j] = (divDiff[i+1][j-1] - divDiff[i][j-1]) / (pts[i+j].x - pts[i].x);
+
+        let result = divDiff[0][0];
+        let mult = 1;
+        for (let i = 1; i < n; i++) {
+          mult *= (x - pts[i - 1].x);
+          result += divDiff[0][i] * mult;
+        }
+        return result;
+      }
+
+      let Lipschitz = 0.000005; // Adjusted for demo purposes
+      let d = "M";
+      let f = "M";
+      let u = 0;
+      // text.textContent = `Lipschitz constant: ${slider.value}`;
+      const svg = document.getElementById('svgCanvas');
+      const rect = svg.getBoundingClientRect();
+      // console.log(`SVG width: ${rect.width}, height: ${rect.height}`);
+      const upper = [], lower = [];
+      for (let x = 0; x <= rect.width; x += 1) {
+        const y = newtonInterp(pts, x);
+        d += `${x},${y} `;
+        const n = pts.length;
+        let mult = 1;
+        let fact = 1;        
+        for (let i = 0; i < n; i++) {
+          mult *= (x - pts[i].x);          
+          fact *= (i + 1);
+        }
+        u = mult / fact * Lipschitz * slider.value; // Simplified error term
+        upper.push([x, y - u]);
+        lower.unshift([x, y + u]);
+      }
+      path.setAttribute("d", d);
+      f += upper.map(p => `${p[0]},${p[1]}`).join(" ") + " " + lower.map(p => `${p[0]},${p[1]}`).join(" ") + " Z";
+      fill.setAttribute("d", f);
+    }
+
+    circles.forEach(circle => {
+      circle.addEventListener("pointerdown", e => {
+        selected = e.target;
+        offset.x = e.offsetX - parseFloat(selected.getAttribute("cx"));
+        offset.y = e.offsetY - parseFloat(selected.getAttribute("cy"));
+      });
+    });
+
+    svg.addEventListener("pointermove", e => {
+      if (selected) {
+        const pt = svg.createSVGPoint();
+        pt.x = e.clientX;
+        pt.y = e.clientY;
+        const ctm = svg.getScreenCTM().inverse();
+        const transformed = pt.matrixTransform(ctm);
+        selected.setAttribute("cx", transformed.x - offset.x);
+        selected.setAttribute("cy", transformed.y - offset.y);
+        updatePath();
+      }
+    });
+
+    svg.addEventListener("pointerup", () => selected = null);
+    svg.addEventListener("pointerleave", () => selected = null);
+
+    slider.addEventListener('input', () => {
+      updatePath();
+    });
+    updatePath();
+  </script>
+  
+  
+</body>
+</html>
