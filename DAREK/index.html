@@ -61,7 +61,7 @@
   <section class="py-5 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-4 ">Abstract</h2>
       <div class="flex flex-col md:flex-row items-center md:items-start md:justify-center gap-6">
-        <p class="text-gray-700 max-w-3xl mx-auto text-justify">
+        <p class="text-gray-700 max-w-3xl text-justify">
           We present DAREK, a method to compute <b>tight</b>, <b>distance-aware</b>, <b>worst-case error bounds</b> for Kolmogorov-Arnold Networks (KANs). Unlike probabilistic uncertainty estimation, DAREK uses Lipschitz continuity of true functions to derive analytical bounds that increase with distance from training data.
         </p>
         <div class="flex-shrink-0">
@@ -141,10 +141,28 @@
   </section>
 
   <!-- Results -->
-  <section class="py-5 px-4">
+  <section class="py-5 px-4 md:px-20">
+    <h2 class="text-2xl font-bold mb-4">Results</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center items-start max-w-4xl mx-auto">
+      
+      <div class="flex flex-col items-center w-full max-w-[400px]">
+        <img src="imgs/overlayed_gifsanim_GP2.gif" alt="Base GIF" class="w-full h-auto rounded shadow">
+        <p class="text-center mt-2 text-gray-700">Multi-agent simulation when GP model fails.</p>
+      </div>
+      
+      <div class="flex flex-col items-center w-full max-w-[400px]">
+        <img src="imgs/overlayed_gifsanim_DAREK2.gif" alt="Base GIF" class="w-full h-auto rounded shadow">
+        <p class="text-center mt-2 text-gray-700">Multi-agent simulation when DAREK model reaches goal.</p>
+      </div>
+      
+    </div>
+  </section>
+
+<!--   
+  <section class="py-5 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-2">Results</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-auto gap-5 justify-items-center items-start">
-        <div class="flex flex-col items-center">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-auto gap-5 justify-items-center items-start">        
+        <div class="flex flex-col items-center">        
           <img src="imgs/overlayed_gifsanim_GP2.gif" alt="Base GIF" style="width: 300px; height: auto;">
           <p class="text-center mt-2 text-gray-700">Multi agent simulation when GP model fails.</p>
         </div>
@@ -153,10 +171,10 @@
           <p class="text-center mt-2 text-gray-700">Multi agent simulation when DAREK model reach goal.</p>          
         </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- BibTeX -->
-  <section class="bg-gray-50 py-12 px-4 md:px-20">
+  <section class="bg-gray-50 py-4 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-4">Cite This Work</h2>
     <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
 @inproceedings{ataei2025darek,
