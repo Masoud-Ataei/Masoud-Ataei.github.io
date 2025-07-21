@@ -31,19 +31,22 @@ const rect_poly = document
   .querySelector("rect");
 const rect_gp = document.getElementById("gp_line").querySelector("rect");
 
-
 function updatePath() {
   const vis_poly = rect_poly.getAttribute("fill") === "#5555ff";
   const vis_gp = rect_gp.getAttribute("fill") === "#ff7777";
+  document.getElementById("polynomial_line")
+          .querySelector("polyline")
+          .setAttribute("stroke-width",  vis_poly ? 4 : 0);;
+  document.getElementById("gp_line")        
+          .querySelector("polyline")
+          .setAttribute("stroke-width",  vis_gp ? 4 : 0);;
   const pts = circles
     .map((c) => ({
       x: parseFloat(c.getAttribute("cx")),
       y: parseFloat(c.getAttribute("cy")),
     }))
     .sort((a, b) => a.x - b.x);
-
   
-
   if (vis_poly) {
     let Lipschitz = 0.000005; // Adjusted for demo purposes
     let d = "M";
@@ -297,7 +300,7 @@ updatePath();
 rect_poly.addEventListener("click", () => {
   // Toggle between two colors
   if (rect_poly.getAttribute("fill") === "#5555ff") {
-    rect_poly.setAttribute("fill", "#ffffff"); // change to white
+    rect_poly.setAttribute("fill", "#ffffff"); // change to white    
   } else {
     rect_poly.setAttribute("fill", "#5555ff"); // change back to blue
   };
