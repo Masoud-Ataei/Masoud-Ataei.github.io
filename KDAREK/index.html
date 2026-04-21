@@ -39,9 +39,10 @@
       </div>
 
       <!-- Buttons -->
+      <!-- href="https://arxiv.org/abs/2510.22021" -->
       <div class="flex flex-wrap justify-center gap-4">
         <a
-          href="https://arxiv.org/abs/2510.22021"
+          href="https://ieeexplore.ieee.org/document/11443822"
           target="_blank"
           class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded shadow transition"
         >
@@ -68,7 +69,7 @@
   <!-- Abstract -->
   <section class="py-5 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-4 ">Abstract</h2>
-      <div class="flex flex-col md:flex-row items-center md:items-start md:justify-center gap-6">
+      <div class="w-full md:w-[48%] border rounded shadow-md overflow-hidden bg-gray-50 p-4">
         <p class="text-gray-700 max-w-3xl text-justify">
           K-DAREK is a novel extension of DAREK that introduces <b>distance-aware error bounds</b> for more <b>robust</b> function approximation. 
           By measuring uncertainty based on the distance to training data, it produces <b>tighter</b> and <b>more meaningful</b> confidence estimates. 
@@ -88,8 +89,6 @@
     <h2 class="text-2xl font-bold mb-6">Interactive Demo of Newton Polynomial</h2>
     <!-- <h2 id="temprary">Interactive Demo</h2> -->
     <div class="flex justify-center">
-
-
       <div class="border rounded shadow-md overflow-hidden bg-gray-50 p-4">
         <div style="display: flex; align-items: center; gap: 16px; margin-top: 0rem; margin-bottom: 1rem;">
 
@@ -97,7 +96,7 @@
           <span style="width: 40%; text-align: right;">Lipschitz constant</span>
           <input type="range" id="lipSlider" min="0" max="10" step="1" value="1" style="width: 200px;">
         </div>
-        <svg id="svgCanvas" width="500px" height="300px" class="bg-white border" style="touch-action: none;">
+        <svg id="svgCanvasLip" width="500px" height="300px" class="bg-white border" style="touch-action: none;">
           <path id="FillGP" fill="rgba(255, 0,   0, 0.3)" stroke="none" d="" />
           <path id="polyFill" fill="rgba(0  , 0, 255, 0.3)" stroke="none" d="" />
           <path id="GP" stroke="rgba(255, 0,   0, 1.0)" stroke-width="2" fill="none" d="" />
@@ -160,8 +159,30 @@
           <p class="text-sm text-gray-600 mt-2 text-center">Click and drag any circle. 
                     Newton polynomial and interpolation error bounds.</p>
       </div>
-      
+      <!-- ##################################  -->
+      <!-- <div class="flex justify-center"> -->
+      <div class="border rounded shadow-md overflow-hidden bg-gray-50 p-4">
+
+        <!-- Slider -->
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:1rem;">
+          <span style="width:40%; text-align:right;">Spline Degree</span>
+          <input type="range" id="degreeSlider" min="0" max="5" step="1" value="2">
+          <span id="degreeValue">2</span>
+        </div>
+
+        <!-- Canvas -->
+        <svg id="svgCanvasBasis" width="600" height="300" class="bg-white border">
+          
+
+        </svg>
+
+        <p class="text-sm text-gray-600 mt-2 text-center">
+          Drag knots horizontally. Adjust spline degree.
+        </p>          
+      </div>
+      <!-- ##################################  -->
     </div>
+    
   </section>
 
   <!-- Highlights -->
@@ -194,7 +215,7 @@
   <section class="bg-gray-50 py-4 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-4">Cite This Work</h2>
     <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
-      @INPROCEEDINGS{ataei2025kdarek,
+  @INPROCEEDINGS{ataei2025kdarek,
   author={Ataei, Masoud and Dhiman, Vikas and Khojasteh, Mohammad Javad},
   booktitle={2025 59th Asilomar Conference on Signals, Systems, and Computers}, 
   title={K-DAREK: Distance Aware Error for Kurkova Kolmogorov Networks}, 
@@ -211,8 +232,8 @@
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="./interactive-env.js"> </script>
-  
+  <script src="./interactive-poly.js"> </script>
+  <script src="./interactive-basis.js"></script>
   
 </body>
 </html>
