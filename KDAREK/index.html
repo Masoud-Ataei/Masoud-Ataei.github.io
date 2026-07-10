@@ -9,7 +9,7 @@
 </head>
 <body class="bg-white text-gray-800 font-sans">
   <!-- Hero -->
-  <section class="text-center py-4 bg-gradient-to-br from-blue-100 to-white" id="home">    
+  <section class="text-center py-4 bg-gradient-to-br from-blue-100 to-white" id="home">
     <div class="container mx-auto px-4 py-5 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">K-DAREK</h1>
       <p class="text-xl mb-2 text-gray-800"> Distance Aware Error for Kurkova Kolmogorov Networks </p>
@@ -66,8 +66,24 @@
     </div>
   </section>
 
+  <!-- Navigation Bar -->
+  <nav class="bg-white shadow mb-4 sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+      <div class="space-x-6">
+        <a href="#home" class="font-bold text-xl text-blue-700">K-DAREK</a>
+        <a href="#abstract" class="text-gray-700 hover:text-blue-600">Abstract</a>
+        <a href="#interactive-demo" class="text-gray-700 hover:text-blue-600">Interactive Demo</a>
+        <a href="#highlights" class="text-gray-700 hover:text-blue-600">Highlights</a>
+        <a href="#results" class="text-gray-700 hover:text-blue-600">Results</a>
+        <a href="#cite-this-work" class="text-gray-700 hover:text-blue-600">Cite</a>
+      </div>
+      <div>
+        <a href="../index.html" class="text-gray-700 hover:text-blue-600">&larr; Back to home</a>
+      </div>
+    </div>
+  </nav>
   <!-- Abstract -->
-  <section class="py-5 px-4 md:px-20">
+  <section id="abstract" class="py-5 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-4 ">Abstract</h2>
       <div class="w-full md:w-[48%] border rounded shadow-md overflow-hidden bg-gray-50 p-4">
         <p class="text-gray-700 max-w-3xl text-justify">
@@ -85,7 +101,7 @@
   </section>
 
   <!-- Interactive Demo -->
-  <section class="py-5 px-4 md:px-20">
+  <section id="interactive-demo" class="py-5 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-6">Interactive Demo of Newton Polynomial</h2>
     <!-- <h2 id="temprary">Interactive Demo</h2> -->
     <div class="flex justify-center">
@@ -186,7 +202,7 @@
   </section>
 
   <!-- Highlights -->
-  <section class="bg-gray-100 py-5 px-4 md:px-20">
+  <section id="highlights" class="bg-gray-100 py-5 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-2">Highlights</h2>
     <ul class="list-disc list-inside max-w-3xl mx-auto text-gray-700 space-y-2">
       <li> <b>Distance-aware uncertainty</b>: Provides tighter, data-dependent error bounds that improve reliability in prediction.</li>
@@ -201,7 +217,7 @@
   </section>
 
   <!-- Results -->
-  <section class="py-5 px-4 md:px-20">
+  <section id="results" class="py-5 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-4">Results</h2>
     <div class="grid grid-cols-1 md:grid-cols-1 gap-8 justify-items-center items-start max-w-4xl mx-auto">
         <div class="flex flex-col items-center w-full max-w-[400px]">
@@ -212,7 +228,7 @@
   </section>
   
   <!-- BibTeX -->
-  <section class="bg-gray-50 py-4 px-4 md:px-20">
+  <section id="cite-this-work" class="bg-gray-50 py-4 px-4 md:px-20">
     <h2 class="text-2xl font-bold mb-4">Cite This Work</h2>
     <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
   @INPROCEEDINGS{ataei2025kdarek,
