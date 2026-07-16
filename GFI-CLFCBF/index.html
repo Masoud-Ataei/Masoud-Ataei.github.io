@@ -69,45 +69,45 @@
   <!-- Summary -->
   <section id="summary" class="py-5 px-4 md:px-20 pt-10">
     <h2 class="text-2xl font-bold mb-4">Summary</h2>
-    <!-- <div class="flex justify-center mb-6">
-      <img src="img/Grid2.png" alt="Grid-following inverter safety concept" class="w-full max-w-lg h-auto rounded-lg shadow-md">
-    </div> -->
-    <div class="max-w-3xl mx-auto text-gray-700 space-y-4 text-justify">
-      <p>
-        Conventional current controllers for grid-following inverters, such as PI and LQR, can overshoot during
-        voltage sags and transients, pushing inverter currents past their safe operating limits. This work embeds
-        current-safety guarantees directly into the control law by combining a Control Lyapunov Function (CLF),
-        built from the LQR Riccati solution, with two Control Barrier Functions (CBFs) that enforce the IEEE 1547
-        d- and q-axis current limits.
-      </p>
-      <p>
-        The CLF and CBF constraints are unified into a single quadratic program (QP) solved every switching cycle:
-        the CLF term drives the current toward its reference, while the CBF constraints act as hard safety walls
-        that are never violated, using a super-linear class-&Kopf; function for smooth control away from the limit
-        and aggressive correction near it.
-      </p>
-      <p>
-        In MATLAB/Simulink simulations of a 100&nbsp;kVA grid-connected inverter under a 0.6&nbsp;pu voltage sag,
-        the CLF-CBF-QP controller kept the peak current at 219.5&nbsp;A, within the 224.5&nbsp;A safe limit, while
-        PI and LQR controllers overshot to 237.8&nbsp;A and 240.8&nbsp;A respectively. The proposed controller also
-        achieved the lowest total harmonic distortion (3.46% vs. 4.72% for PI and 5.63% for LQR), with QP solve
-        times (271.5&nbsp;&mu;s) comparable to the PI and LQR baselines.
-      </p>
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8">
+      <div class="text-gray-700 space-y-4 text-justify md:flex-1 md:order-1 order-2">
+        <p>
+          Conventional current controllers for grid-following inverters, such as PI and LQR, can overshoot during
+          voltage sags and transients, pushing inverter currents past their safe operating limits. This work embeds
+          current-safety guarantees directly into the control law by combining a Control Lyapunov Function (CLF),
+          built from the LQR Riccati solution, with two Control Barrier Functions (CBFs) that enforce the IEEE 1547
+          d- and q-axis current limits.
+        </p>
+        <p>
+          The CLF and CBF constraints are unified into a single quadratic program (QP) solved every switching cycle:
+          the CLF term drives the current toward its reference, while the CBF constraints act as hard safety walls
+          that are never violated, using a super-linear class-&Kopf; function for smooth control away from the limit
+          and aggressive correction near it.
+        </p>
+        <p>
+          In MATLAB/Simulink simulations of a 100&nbsp;kVA grid-connected inverter under a 0.6&nbsp;pu voltage sag,
+          the CLF-CBF-QP controller kept the peak current at 219.5&nbsp;A, within the 224.5&nbsp;A safe limit, while
+          PI and LQR controllers overshot to 237.8&nbsp;A and 240.8&nbsp;A respectively. The proposed controller also
+          achieved the lowest total harmonic distortion (3.46% vs. 4.72% for PI and 5.63% for LQR), with QP solve
+          times (271.5&nbsp;&mu;s) comparable to the PI and LQR baselines.
+        </p>
+      </div>
+      <div class="md:flex-1 md:order-2 order-1 flex flex-col items-center">
+        <img src="img/Grid2.png" alt="Grid-following inverter with LCL filter and CLF-CBF-QP control loop"
+            class="w-full max-w-xl h-auto rounded-lg shadow-md">
+        <p class="text-center mt-2 text-sm text-gray-600 max-w-xl">
+          Three-phase grid-following inverter with LCL filter; the CLF-CBF-QP controller computes safe voltage
+          commands (v1d, v1q) every switching cycle.
+        </p>
+      </div>
     </div>
   </section>
 
   <!-- Result -->
   <section id="result" class="bg-gray-100 py-5 px-4 md:px-20 pt-10">
     <h2 class="text-2xl font-bold mb-6">Result</h2>
-    <div class="flex flex-col items-center max-w-3xl mx-auto">
-      <img src="img/Grid2.png" alt="Grid-following inverter with LCL filter and CLF-CBF-QP control loop"
-        class="w-full max-w-xl h-auto rounded-lg shadow-md">
-      <p class="text-center mt-2 text-sm text-gray-600 max-w-xl">
-        Three-phase grid-following inverter with LCL filter; the CLF-CBF-QP controller computes safe voltage
-        commands (v1d, v1q) every switching cycle.
-      </p>
-
-      <div class="overflow-x-auto w-full max-w-lg mt-8">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8">
+      <div class="overflow-x-auto w-full max-w-lg md:flex-1">
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="border-b-2 border-gray-300">
@@ -138,6 +138,19 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="md:flex-1 flex flex-col items-center">
+        <img src="img/CurrentTracking.png" alt="d-axis current tracking comparison for PI, LQR, and CLF-CBF-QP controllers"
+            class="w-full max-w-xl h-auto rounded-lg shadow-md">
+        <p class="mt-2 text-sm text-gray-600 max-w-xl text-justify">
+          d-axis current tracking. <strong>PI</strong> overshoots and recovers slowly. <strong>LQR</strong> recovers fast but breaches the
+          limit. <strong>CLF-CBF-QP</strong>: fast recovery, limit never crossed.
+        </p>
+        <ul class="mt-2 text-sm text-gray-600 max-w-xl list-disc list-inside space-y-1">
+          <li><strong>PI</strong> &ndash; overshoots and recovers slowly</li>
+          <li><strong>LQR</strong> &ndash; fast recovery, but breaches the limit</li>
+          <li><strong>CLF-CBF-QP</strong> &ndash; fast recovery, limit never crossed</li>
+        </ul>
       </div>
     </div>
   </section>
