@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Drift Debt Simulator</title>
-<meta name="description" content="Interactive simulator for the Drift Debt engine-event handler problem, by Masoud Ataei.">
+<meta name="description" content="Interactive simulator for the Drift Debt engine-event handler problem, by Masoud Ataei, built with help from Claude.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -80,19 +80,6 @@
   tr.fail td{color:var(--off);text-align:left}
   tr.ok td{color:var(--on);text-align:left}
 
-  /* problem + code */
-  details summary{cursor:pointer;font-weight:600}
-  .prose{color:#c9d3e4;font-size:15px}
-  .prose ol,.prose ul{padding-left:20px}
-  .prose code{font-family:var(--mono);font-size:13px;background:var(--panel2);padding:1px 5px;border-radius:4px}
-  .tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
-  .tabs button.active{border-color:var(--accent);color:var(--accent)}
-  .tabs .spacer{flex:1}
-  pre{margin:0;background:#060a12;border:1px solid var(--line);border-radius:10px;padding:16px;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.6}
-  pre .c{color:#6b7a96}
-  pre .s{color:#ffcf8a}
-  pre .k{color:#8fb6ff}
-  pre .n{color:#7fe0b4}
   footer{margin-top:32px;color:var(--muted);font-size:13px}
 </style>
 </head>
@@ -204,74 +191,11 @@
     </section>
   </div>
 
-  <section class="card" style="margin-top:16px">
-    <details>
-      <summary>The problem</summary>
-      <div class="prose">
-        <p>The crew has manually corrected 14 Engine A shutdowns so far, but now they must enter hyper sleep. You must write the event handler that keeps the mission alive.</p>
-        <ol>
-          <li>Engine A starts ON. Events arrive only when it toggles, carrying its new state <code>isOn</code>. Event times are monotonic.</li>
-          <li>While Engine A is OFF, the ship accrues drift debt, one second of debt per second OFF.</li>
-          <li>Correcting the drift burns reserve fuel at <code>driftDebtSeconds × correctionRatePerSecond</code>, and the thrusters can only fire while Engine A is ON.</li>
-          <li>If Engine A cuts out again before the previous drift is fully corrected, the leftover debt carries over.</li>
-          <li>If the reserve cannot cover the debt, log exactly once: <code>LOG: Mission failure — reserve exhausted (used X / capacity Y)</code>.</li>
-          <li>Only <code>onEngineEvent</code> may be implemented; nothing else in the codebase can change.</li>
-        </ol>
-        <p>Modeling assumptions in this simulator: one second of thruster time corrects one second of drift, and the handler checks the fuel on every engine event. Debt still owed at arrival is counted as fuel spent on final approach.</p>
-      </div>
-    </details>
-  </section>
-
-  <section class="card" style="margin-top:16px">
-    <h2>The solution running underneath</h2>
-    <p class="small" style="margin-top:-6px">The key insight: <code>event.isOn</code> is Engine A's state <em>after</em> the toggle, so the interval just measured belongs to the <em>previous</em> state. The simulator runs the JavaScript port below, which mirrors the Java version line for line.</p>
-    <div class="tabs">
-      <button type="button" class="active" data-tab="java">Java</button>
-      <button type="button" data-tab="js">JavaScript (live in this page)</button>
-      <span class="spacer"></span>
-      <button type="button" id="copyBtn">Copy</button>
-    </div>
-    <pre><code id="codeView"></code></pre>
-  </section>
-
-  <footer>Built by Masoud Ataei.</footer>
+  <footer>Built by Masoud Ataei, with help from Claude (Anthropic).</footer>
 </div>
 
-<script type="text/plain" id="javaSrc">private long accumulatedDriftDebt = 0;            // ns of uncorrected drift
-private long lastEventNanos = System.nanoTime();  // mission start
-private boolean engineOn = true;                  // Engine A starts ON
-private double fuelUsed = 0;
-private boolean failureLogged = false;
-
-public void onEngineEvent(EngineEvent event) {
-    long now = System.nanoTime();
-    long dt = now - lastEventNanos;
-    lastEventNanos = now;
-
-    // dt belongs to the state BEFORE this event
-    if (engineOn) {
-        long corrected = Math.min(accumulatedDriftDebt, dt);
-        accumulatedDriftDebt -= corrected;            // leftover carries over
-        fuelUsed += toSec(corrected) * correctionRatePerSecond;
-    } else {
-        accumulatedDriftDebt += dt;                   // drift accrues
-    }
-    engineOn = event.isOn;
-
-    double committed = fuelUsed
-        + toSec(accumulatedDriftDebt) * correctionRatePerSecond;
-    if (!failureLogged && committed > reserveFuelUnits) {
-        failureLogged = true;
-        System.out.printf(
-            "LOG: Mission failure — reserve exhausted (used %.0f / capacity %d)%n",
-            committed, reserveFuelUnits);
-    }
-}
-
-private static double toSec(long ns) { return ns / 1e9; }</script>
-
 <script>
-// ===== The handler: line-for-line port of the Java solution =====
+// ===== Drift-correction event handler =====
 class DriftCorrectionHandler {
   constructor(reserveFuelUnits, correctionRatePerSecond, clock, log) {
     this.reserveFuelUnits = reserveFuelUnits;
@@ -674,33 +598,8 @@ class EngineEvent {
     out.style.color = pct >= 90 ? 'var(--on)' : pct >= 50 ? 'var(--fix)' : 'var(--off)';
   });
 
-  // ---- code viewer ----
-  const SRC = { java: $('javaSrc').textContent, js: DriftCorrectionHandler.toString() };
-  let tab = 'java';
-  function highlight(src) {
-    const re = /(\/\/[^\n]*)|("(?:[^"\\\n]|\\.)*"|`(?:[^`\\]|\\.)*`)|\b(private|public|final|class|long|double|boolean|void|if|else|return|static|true|false|new|const|let|this|constructor)\b|\b(\d[\d_]*(?:\.\d+)?(?:e\d+)?)\b/g;
-    let out = '', last = 0, m;
-    while ((m = re.exec(src))) {
-      out += escapeHtml(src.slice(last, m.index));
-      const cls = m[1] ? 'c' : m[2] ? 's' : m[3] ? 'k' : 'n';
-      out += `<span class="${cls}">${escapeHtml(m[0])}</span>`;
-      last = re.lastIndex;
-    }
-    return out + escapeHtml(src.slice(last));
-  }
-  function showCode() {
-    $('codeView').innerHTML = highlight(SRC[tab]);
-    document.querySelectorAll('.tabs [data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  }
-  document.querySelectorAll('.tabs [data-tab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.tab; showCode(); }));
-  $('copyBtn').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(SRC[tab]); $('copyBtn').textContent = 'Copied'; }
-    catch (e) { $('copyBtn').textContent = 'Copy failed'; }
-    setTimeout(() => { $('copyBtn').textContent = 'Copy'; }, 1500);
-  });
-
   // ---- start ----
-  syncInputs(); reset(); showCode();
+  syncInputs(); reset();
   requestAnimationFrame(frame);
 })();
 </script>
